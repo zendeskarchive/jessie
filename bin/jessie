@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+// Load jessie
+var path   = require('path');
+var fs     = require('fs');
+var lib    = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
+require.paths.push(lib)
+require.paths.push(process.cwd() + '/spec')
+var jessie = require('jessie');
+
+// Load package.json 
+var pkgsrc  = fs.readFileSync(__dirname + '/../package.json');
+var pkg     = JSON.parse(pkgsrc)
+
+// Enable cli and set version name based on package.json
+var cli  = require('cli').enable('version');
+cli.setApp(pkg.name, pkg.version)
+
+// Command line options
+cli.parse({
+  log:   ['l', 'Enable logging'],
+  port:  ['p', 'Listen on this port', 'number', 8080],
+  serve: [false, 'Serve static files from PATH', 'path', './public']
+});
+
+// Main loop
+cli.main(function(args, options) {
+  jessie.run(args, options, function(fail) {
+    process.exit(fail ? 1 : 0)
+  })
+})

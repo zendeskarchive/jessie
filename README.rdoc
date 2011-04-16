@@ -1,0 +1,17 @@
+== jessie
+
+jessie is a Node runner for Jasmine. It's aimed at being flexible and easy to modify.
+
+=== Current status
+
+Well, it works ;) It has a rspec2-style formatter.
+
+=== Testing
+
+Tests are in Jasmine and run on jessie. In order to run them, use the binary in the bin folder
+  
+  bin/jessie spec
+
+=== Copyright
+
+Copyright (c) 2011 Marcin Bunsch. See LICENSE for details.
