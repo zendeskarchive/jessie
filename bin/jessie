@@ -16,11 +16,7 @@ var cli  = require('cli').enable('version');
 cli.setApp(pkg.name, pkg.version)
 
 // Command line options
-cli.parse({
-  log:   ['l', 'Enable logging'],
-  port:  ['p', 'Listen on this port', 'number', 8080],
-  serve: [false, 'Serve static files from PATH', 'path', './public']
-});
+// cli.parse({});
 
 // Main loop
 cli.main(function(args, options) {
