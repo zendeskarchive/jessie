@@ -12,6 +12,10 @@ Tests are in Jasmine and run on jessie. In order to run them, use the binary in 
   
   bin/jessie spec
 
+=== Acknowledgement
+
+jessie is largely based on https://github.com/mhevery/jasmine-node. The goal of jessie is to make it more modular and configurable.
+
 === Copyright
 
 Copyright (c) 2011 Marcin Bunsch. See LICENSE for details.
