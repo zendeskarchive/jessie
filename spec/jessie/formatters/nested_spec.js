@@ -14,14 +14,17 @@ describe('formatters', function() {
       })
 
       it("should use a F to render a successful spec", function() {
+        var original_depth = reporter.formatter.depth
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
         capture.output().should_match('my spec')
         capture.output().should_match(/\033\[31m/) // green
+        reporter.formatter.depth = original_depth
       })
       
       it("should render the spec with appropriate spacing on the left", function() {
+        var original_depth = reporter.formatter.depth
         reporter.formatter.depth = 1
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.specStart({description: 'my spec'})
@@ -34,6 +37,7 @@ describe('formatters', function() {
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
         capture.output().should_match(/^ {4}/)
+        reporter.formatter.depth = original_depth
       })
         
     })
@@ -41,13 +45,19 @@ describe('formatters', function() {
     describe('single suite', function() {
 
       it("should render the suite name", function() {
+        var original_depth = reporter.formatter.depth
+        
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
         })
         capture.output().should_match('my suite')
+        reporter.formatter.depth = original_depth
+        
       })  
 
       it("should render the suite name with appropriate spacing on the left", function() {
+        var original_depth = reporter.formatter.depth
+        
         reporter.formatter.depth = 1
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
@@ -65,9 +75,12 @@ describe('formatters', function() {
         })
         capture.output().should_match(/^ {4}/)
 
+        reporter.formatter.depth = original_depth
+
       })
 
       it("should increase depth when starting a suite", function() {
+        var original_depth = reporter.formatter.depth
         
         reporter.formatter.depth = 1
 
@@ -76,13 +89,19 @@ describe('formatters', function() {
         })
                 
         reporter.formatter.depth.should_be(2)
+        reporter.formatter.depth = original_depth
         
       })
       
       it("should decrease depth when ending a suite", function() {
+        var original_depth = reporter.formatter.depth
+        
         reporter.formatter.depth = 2
         reporter.formatter.suite()
         reporter.formatter.depth.should_be(1)
+        
+        reporter.formatter.depth = original_depth
+        
       })
       
     })

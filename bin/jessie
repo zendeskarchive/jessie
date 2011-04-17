@@ -6,7 +6,8 @@ var fs     = require('fs');
 var lib    = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 require.paths.push(lib)
 require.paths.push(process.cwd() + '/spec')
-var jessie = require('jessie');
+
+var jessie = require(path.join(lib, 'jessie'));
 
 // Load package.json 
 var pkgsrc  = fs.readFileSync(__dirname + '/../package.json');
