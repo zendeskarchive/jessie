@@ -11,7 +11,7 @@
   "dependencies"  : ["cli"],
   "engines": {
     "node": ">=0.4.0"
-  }
+  },
   "licenses":     [{
     "type":       "MIT",
     "url":        "http://github.com/futuresimple/jessie/raw/master/LICENSE"
