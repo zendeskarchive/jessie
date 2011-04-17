@@ -30,4 +30,70 @@ describe('jessie.sugar', function() {
 
   })
   
+  describe('.should_not_be', function() {
+
+    it('should work with strings', function() {
+      var variable = "Foo"
+      variable.should_not_be("Boo")
+    })
+
+    it('should work with numbers', function() {
+      var variable = 4
+      variable.should_not_be(6)
+      variable = 10.0
+      variable.should_not_be(11.0)
+    })
+
+    it('should work with arrays', function() {
+      var variable = [1,2]
+      variable.should_not_be([1,2,3])
+    })
+
+    it('should work with objects', function() {
+      var variable = { a: 1, b: 2 }
+      variable.should_not_be({ a: 1, b: 2, c:3})
+    })
+    
+  })
+  
+  describe('.should_match', function() {
+    
+    it('should work with strings', function() {
+      var variable = "Michael Johnson"
+      variable.should_match('Johnson')
+    })
+    
+  })
+  
+  describe('.should_be_a', function() {
+    
+    it('should work with strings', function() {
+      var variable = "Foo"
+      variable.should_be_a(String)
+    })
+
+    it('should work with strings', function() {
+      var variable = 4
+      variable.should_be_a(Number)
+    })
+
+    it('should work with arrays', function() {
+      var variable = [1,2]
+      variable.should_be_a(Array)      
+    })  
+
+    it('should work with objects', function() {
+      var variable = { a: 1, b: 2 }
+      variable.should_be_a(Object)      
+    })  
+    
+  })
+  
+  describe('jasmine', function() {
+    
+    it("should extend jasmine.PrettyPrinter.prototype.format with ability to run emitJasmine", function() {
+      jasmine.PrettyPrinter.prototype.format.toString().should_match('value.emitJasmine')
+    })
+    
+  })
 })
