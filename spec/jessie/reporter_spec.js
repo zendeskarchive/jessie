@@ -2,7 +2,7 @@ describe('jessie.reporter', function() {
   var reporter = new (require('jessie/reporter')).reporter('progress')
 
   it("should load formatter", function() {
-    reporter.formatter.should_be_a(Object)      
+    expect(reporter.formatter.constructor).toEqual(Object)
   })
   
   it("should respond to jasmine reporter methods", function() {

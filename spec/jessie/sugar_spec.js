@@ -22,12 +22,6 @@ describe('jessie.sugar', function() {
       variable.should_be([1,2])
     })
 
-    it('should work with objects', function() {
-      var variable = { a: 1, b: 2 }
-      expect(variable).toEqual({ a: 1, b: 2})
-      variable.should_be({ a: 1, b: 2})
-    })
-
   })
   
   describe('.should_not_be', function() {
@@ -47,11 +41,6 @@ describe('jessie.sugar', function() {
     it('should work with arrays', function() {
       var variable = [1,2]
       variable.should_not_be([1,2,3])
-    })
-
-    it('should work with objects', function() {
-      var variable = { a: 1, b: 2 }
-      variable.should_not_be({ a: 1, b: 2, c:3})
     })
     
   })
@@ -82,9 +71,9 @@ describe('jessie.sugar', function() {
       variable.should_be_a(Array)      
     })  
 
-    it('should work with objects', function() {
-      var variable = { a: 1, b: 2 }
-      variable.should_be_a(Object)      
+    it('should work with functions', function() {
+      var variable = function() {}
+      variable.should_be_a(Function)      
     })  
     
   })
