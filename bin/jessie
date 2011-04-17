@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Load jessie
 var path   = require('path');
+var sys   = require('sys');
 var fs     = require('fs');
 var lib    = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
 require.paths.push(lib)
@@ -15,11 +16,18 @@ var pkg     = JSON.parse(pkgsrc)
 var cli  = require('cli').enable('version');
 cli.setApp(pkg.name, pkg.version)
 
-// Command line options
-// cli.parse({});
+cli.setUsage('jessie [OPTIONS] [spec dirs/files]')
+
+cli.parse({
+  format: ['f', 'Output format to use', 'string', 'progress']
+}, null);
 
 // Main loop
 cli.main(function(args, options) {
+  if (args.length == 0) {
+    sys.puts(cli.getUsage())
+    process.exit(1)
+  }
   jessie.run(args, options, function(fail) {
     process.exit(fail ? 1 : 0)
   })
