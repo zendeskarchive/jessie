@@ -1,6 +1,6 @@
 {
   "name"          : "jessie", 
-  "version"       : "0.1.0", 
+  "version"       : "0.2.0", 
   "description"   : "Node runner for Jasmine JavaScript BDD testing framework", 
   "homepage"      : [ "http://pivotal.github.com/jasmine", "https://github.com/marcinbunsch/jessie"], 
   "repository"    : { "type" : "git", "url"  : "https://github.com/marcinbunsch/jessie.git" }, 
