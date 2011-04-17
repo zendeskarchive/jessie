@@ -1,21 +1,57 @@
-== jessie
+= Jessie - a Node runner for Jasmine
 
-jessie is a Node runner for Jasmine. It's aimed at being flexible and easy to modify.
+Jessie is a Node runner for Jasmine. It was created to provide better reporting on failures, more modular design, easier creation of formatters and optional syntactic sugar.  
 
-=== Current status
+=== Usage
 
-Well, it works ;) It has a rspec2-style formatter.
+  $ jessie
+  Usage:
+    jessie [OPTIONS] [spec dirs/files]
+
+  Options: 
+    -f, --format [STRING]  Output format to use (Default is progress)
+    -v, --version          Display the current version
+    -h, --help             Display help and usage details
+  
+Jessie will run specs in any folder you specify, but it will automatically load up 'spec/spec_helper.js' if it is present.
+
+For details on how to use Jasmine, consult the Jasmine docs at [https://github.com/pivotal/jasmine/wiki]
+
+=== Formatters
+
+Currently Jessie ships with 2 formatters: progress and nested. By default it uses progress. If you want to use nested, you can do it by specifying the -f option:
+
+  jessie spec -f nested
+
+=== Sugar
+
+If you want, Jessie can extend the built-in prototypes with syntactic sugar, so you can use methods like this:
+
+  variable.should_be("Foo Boo")
+  variable.should_not_be(4)
+  variable.should_match("Boo")
+  variable.should_be_a(String)
+
+The number of these methods is limited and will possibly grow with time.
+  
+To use them, put this line into spec/spec_helper.js
+
+  require('jessie').sugar()
+
+== Development
+
+Jessie is a fresh project, so forks are very welcome! 
 
 === Testing
 
-Tests are in Jasmine and run on jessie. In order to run them, use the binary in the bin folder
+Tests are in Jasmine and run on Jessie. In order to run them, use the binary in the bin folder
   
   bin/jessie spec
 
-=== Acknowledgement
+== Acknowledgement
 
-jessie is largely based on https://github.com/mhevery/jasmine-node. The goal of jessie is to make it more modular and configurable.
+jessie is largely based on https://github.com/mhevery/jasmine-node. The goal of jessie is to be more modular and configurable.
 
 === Copyright
 
-Copyright (c) 2011 Marcin Bunsch. See LICENSE for details.
+Copyright (c) 2011 Marcin Bunsch, Future Simple Inc. See LICENSE for details.
