@@ -53,6 +53,15 @@ describe('jessie.sugar', function() {
     })
     
   })
+
+  describe('.should_not_match', function() {
+    
+    it('should work with strings', function() {
+      var variable = "Michael Johnson"
+      variable.should_not_match('Jackson')
+    })
+    
+  })
   
   describe('.should_be_a', function() {
     
