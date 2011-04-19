@@ -23,6 +23,20 @@ Currently Jessie ships with 2 formatters: progress and nested. By default it use
 
   jessie spec -f nested
 
+=== Pending specs
+
+Jessie extends Jasmine with the ability of marking pending specs. All you have to do is call the pending() function within your spec, like this:
+
+  it("should be pending", function() {
+    pending()
+  })
+  
+Optionally, you can provide a message that will appear within spec results, simply by sending an argument to pending(), like this:
+
+  it("should be pending", function() {
+    pending("Add real spec here!")
+  })
+
 === Sugar
 
 If you want, Jessie can extend the built-in prototypes with syntactic sugar, so you can use methods like this:

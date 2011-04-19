@@ -5,7 +5,7 @@ describe('formatters', function() {
     
     describe('single spec', function() {
       
-      it("should use the spec description to render a successful spec", function() {
+      it("should use the green spec description to render a successful spec", function() {
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: false}, {description: 'my spec'})
         })
@@ -13,13 +13,23 @@ describe('formatters', function() {
         capture.output().should_match(/\033\[32m/) // green
       })
 
-      it("should use a F to render a successful spec", function() {
+      it("should use the red spec description to render a failing spec", function() {
         var original_depth = reporter.formatter.depth
         capture = require('helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
         capture.output().should_match('my spec')
-        capture.output().should_match(/\033\[31m/) // green
+        capture.output().should_match(/\033\[31m/) // red
+        reporter.formatter.depth = original_depth
+      })
+
+      it("should use the yello spec description to render a pending spec", function() {
+        var original_depth = reporter.formatter.depth
+        capture = require('helpers/stdout').capture(function() {
+          reporter.formatter.spec({pending: true}, {description: 'my spec'})
+        })
+        capture.output().should_match('my spec')
+        capture.output().should_match(/\033\[33m/) // yellow
         reporter.formatter.depth = original_depth
       })
       
@@ -127,6 +137,50 @@ describe('formatters', function() {
         capture.output().should_match('another_file.js:30:11')
         
       })
+      
+      it("should properly render a summary with pending and failing specs", function() {
+        var result = {duration: 15, failed: 1, total: 3, pending: 1}
+        result.failures= [{
+          description: 'it should print errors',
+          message: 'Expected A to be B',
+          stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
+        }]
+        
+        capture = require('helpers/stdout').capture(function() {
+          reporter.formatter.finish(result)
+        })
+
+        capture.output().should_match(/\033\[31m/) // red
+        capture.output().should_match('3 examples, 1 failure, 1 pending')
+        capture.output().should_match('Completed in 0.015 seconds')
+        capture.output().should_match('it should print errors')
+        capture.output().should_match('Expected A to be B')
+        capture.output().should_match('file.js:23:2')
+        capture.output().should_match('another_file.js:30:11')        
+      })
+
+      it("should properly render a summary with pending and failing specs", function() {
+        var result = {duration: 15, total: 3, pending: 1}
+        result.failures= [{
+          description: 'it should print errors',
+          message: 'Expected A to be B',
+          stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
+        }]
+        
+        capture = require('helpers/stdout').capture(function() {
+          reporter.formatter.finish(result)
+        })
+
+        capture.output().should_match(/\033\[33m/) // red
+        capture.output().should_match('3 examples, 1 pending')
+        capture.output().should_match('Completed in 0.015 seconds')
+        capture.output().should_match('it should print errors')
+        capture.output().should_match('Expected A to be B')
+        capture.output().should_match('file.js:23:2')
+        capture.output().should_match('another_file.js:30:11')        
+      })
+      
+      
     })
   })
   
