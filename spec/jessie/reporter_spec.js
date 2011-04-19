@@ -81,6 +81,7 @@ describe('jessie.reporter', function() {
       
       capture.output().should_match(/\033\[31m/) // red
       
+      capture.output().should_match('Failures:')
       capture.output().should_match('it should print errors')
       capture.output().should_match('Expected A to be B')
       capture.output().should_match('file.js:23:2')
@@ -96,9 +97,10 @@ describe('jessie.reporter', function() {
       }]
       
       capture = require('helpers/stdout').capture(function() {
-        reporter.printFailures(failures)
+        reporter.printPendings(failures)
       })
-      
+
+      capture.output().should_match('Pending:')      
       capture.output().should_match(/\033\[33m/) // yellow
       capture.output().should_match('it should print errors')
       capture.output().should_match('Expected A to be B')

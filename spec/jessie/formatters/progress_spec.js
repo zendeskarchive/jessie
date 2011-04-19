@@ -86,7 +86,7 @@ describe('formatters', function() {
           reporter.formatter.finish(result)
         })
 
-        capture.output().should_match(/\033\[33m/) // red
+        capture.output().should_match(/\033\[33m/) // yellow
         capture.output().should_match('3 examples, 1 pending')
         capture.output().should_match('Completed in 0.015 seconds')
         capture.output().should_match('it should print errors')
