@@ -11,5 +11,29 @@ describe('jessie.jasmine', function() {
   it('should extend jasmine.Suite.prototype.execute with reportSuiteStarting event', function() {
     jasmine.Suite.prototype.execute.toString().should_match('reportSuiteStarting')
   })
+  
+  it("should extend Jasmine with ability to add pending notification", function() {
+    var raised = 0, exception = null
+    try {
+      pending()
+    } catch(e) {
+      raised = 1, exception = e
+    }
+    raised.should_be(1)
+    exception.type.should_be('pending')
+    exception.message.should_be('Not Yet Implemented')
+  })
+
+  it("should extend Jasmine with ability to add pending notification with custom message", function() {
+    var raised = 0, exception = null
+    try {
+      pending('Write some specs')
+    } catch(e) {
+      raised = 1, exception = e
+    }
+    raised.should_be(1)
+    exception.type.should_be('pending')
+    exception.message.should_be('Write some specs')
+  })
 
 })
