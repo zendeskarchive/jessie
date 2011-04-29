@@ -23,6 +23,12 @@ cli.parse({
   format: ['f', 'Output format to use', 'string', 'progress']
 }, null);
 
+process.on('uncaughtException', function (err) {
+  var ansi = require('jessie/ansi')
+  console.log(ansi.red + "Jessie failed to start. Here's some info about the problem:"+ansi.none)
+  console.log(err.stack);
+});
+
 // Main loop
 cli.main(function(args, options) {
   if (args.length == 0) {
