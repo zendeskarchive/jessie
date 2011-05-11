@@ -16,6 +16,7 @@ describe('jessie.jasmine', function() {
     jasmine.Spec.prototype.results_ = jasmine.createSpyObj('results', ['addResult']);
     jasmine.Spec.prototype.fail("this is an error");
     expect(jasmine.Spec.prototype.results_.addResult).toHaveBeenCalled();
+    expect(jasmine.Spec.prototype.results_.addResult.argsForCall[0][0].message);
   });
   
   it("should extend Jasmine with ability to add pending notification", function() {
