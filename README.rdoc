@@ -69,7 +69,7 @@ Jessie is a fresh project, so forks are very welcome!
 
 === Testing
 
-Tests are in Jasmine and run on Jessie. In order to run them, use the binary in the bin folder
+Tests are in Jasmine and run on Jessie. In order to run them, use the binary in the bin folder (be sure to run `npm install` first to get the dependencies)
   
   bin/jessie spec
 

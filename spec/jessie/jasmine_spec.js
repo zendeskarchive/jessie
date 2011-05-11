@@ -11,6 +11,12 @@ describe('jessie.jasmine', function() {
   it('should extend jasmine.Suite.prototype.execute with reportSuiteStarting event', function() {
     jasmine.Suite.prototype.execute.toString().should_match('reportSuiteStarting')
   })
+
+  it('should handle exceptions with no stack traces', function() {
+    jasmine.Spec.prototype.results_ = jasmine.createSpyObj('results', ['addResult']);
+    jasmine.Spec.prototype.fail("this is an error");
+    expect(jasmine.Spec.prototype.results_.addResult).toHaveBeenCalled();
+  });
   
   it("should extend Jasmine with ability to add pending notification", function() {
     var raised = 0, exception = null
