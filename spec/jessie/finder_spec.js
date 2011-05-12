@@ -2,7 +2,7 @@ describe('jessie.finder', function() {
   var finder = new (require('jessie/finder').finder)()
   
   it("should find files if only dir is specified", function() {
-    finder.find(['spec']).length.should_be(8)
+    finder.find(['spec']).length.should_be(9)
   })
   
   it("should find files if only files are specified", function() {
