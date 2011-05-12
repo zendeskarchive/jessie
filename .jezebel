@@ -14,6 +14,7 @@ exports.onChange = function() {
   changes += 1;
 }
 
+// Run me from the REPL to see your test stats!
 exports.stats = function() {
   return {
     passes: passes,
