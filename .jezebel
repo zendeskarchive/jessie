@@ -1,0 +1,23 @@
+var passes = 0,
+    fails = 0,
+    changes = 0;
+
+exports.onPass = function() {
+  passes += 1;
+};
+
+exports.onFail = function() {
+  fails += 1;
+};
+
+exports.onChange = function() {
+  changes += 1;
+}
+
+exports.stats = function() {
+  return {
+    passes: passes,
+    fails: fails,
+    changes: changes 
+  };
+}

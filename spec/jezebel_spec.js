@@ -2,12 +2,16 @@ describe('jezebel', function() {
   var watcher, jezebel, repl, session; 
 
   beforeEach(function() {
-     watcher = require('jezebel/watcher');
-     jezebel = require('jezebel');
-     session = {context: {}}; 
-     spyOn(jezebel.repl, 'start').andReturn(session);
-     spyOn(watcher, 'watchFiles');
-     spyOn(process.stdin, 'emit');
+    watcher = require('jezebel/watcher');
+    jezebel = require('jezebel');
+    session = {context: {}}; 
+    spyOn(jezebel.repl, 'start').andReturn(session);
+    spyOn(watcher, 'watchFiles');
+    spyOn(process.stdin, 'emit');
+    spyOn(require('path'), 'exists').andCallFake(function(file, callback) {
+      expect(file).toEqual(process.cwd() + '/.jezebel');
+      callback(true);
+    });
   });
 
   function binDir() {
@@ -43,6 +47,10 @@ describe('jezebel', function() {
     it('does not run the tests if the file has not actually changed', function() {
       jezebel.fileChanged("", {mtime: new Date(0)}, {mtime: new Date(0)});
       expect(process.stdin.emit).not.toHaveBeenCalled();
+    });
+
+    it('invokes the config callback', function() {
+      expect().toEqual();
     });
   });
 
