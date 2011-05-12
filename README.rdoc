@@ -13,7 +13,7 @@ If you want to install the edge development version, simply clone this repo and 
   git clone git://github.com/futuresimple/jessie.git
   npm install ./jessie
 
-=== Usage
+=== Running Tests
 
   $ jessie
   Usage:
@@ -27,6 +27,21 @@ If you want to install the edge development version, simply clone this repo and 
 Jessie will run specs in any folder you specify, but it will automatically load up 'spec/spec_helper.js' if it is present.
 
 For details on how to use Jasmine, consult the Jasmine docs at [https://github.com/pivotal/jasmine/wiki]
+
+=== Using Jezebel
+
+Jezebel is a continuous test runner and REPL (Read, Evaluate, Print, Loop) for Jessie. You can run it like so:
+
+  $ jezebel 
+  > runTests()
+  > ................................................................
+
+  Completed in 0.037 seconds
+  64 examples 
+
+  > 
+
+Jezebel runs all your tests when it starts, and every time a .js file in or under the current directory is changed. You can force a test run by calling the runTests() function from the REPL. Other functions will become available as jezebel improves.
 
 === Formatters
 
