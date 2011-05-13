@@ -1,4 +1,6 @@
 describe('jezebel', function() {
+  var childProcess = require('child_process'),
+      sys = require('sys');
   var watcher, jezebel, repl, session; 
 
   beforeEach(function() {
@@ -40,8 +42,9 @@ describe('jezebel', function() {
 
   describe('fileChanged', function() {
     it('runs tests if the file has changed', function() {
+      spyOn(childProcess, 'spawn').andReturn(process);
       jezebel.fileChanged("", {mtime: new Date(100)}, {mtime: new Date(0)});
-      expectReplEval('runTests()\n');
+      expect(childProcess.spawn).toHaveBeenCalled();
     });
 
     it('does not run the tests if the file has not actually changed', function() {
@@ -49,14 +52,12 @@ describe('jezebel', function() {
       expect(process.stdin.emit).not.toHaveBeenCalled();
     });
 
-    it('invokes the config callback', function() {
-      expect().toEqual();
+    it('invokes the config callback to determine the tests to run', function() {
+      pending();
     });
   });
 
   describe('runTests', function() {
-    var childProcess = require('child_process'),
-        sys = require('sys');
     var child;
 
     beforeEach(function() {
