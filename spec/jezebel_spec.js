@@ -1,7 +1,7 @@
 describe('jezebel', function() {
   var childProcess = require('child_process'),
       sys = require('sys');
-  var watcher, jezebel, repl, session; 
+  var watcher, jezebel, repl, session, setings; 
 
   beforeEach(function() {
     watcher = require('jezebel/watcher');
@@ -14,6 +14,7 @@ describe('jezebel', function() {
       expect(file).toEqual(process.cwd() + '/.jezebel');
       callback(true);
     });
+    require(process.cwd() + '/.jezebel').settings = settings = {};
   });
 
   function binDir() {
@@ -38,13 +39,21 @@ describe('jezebel', function() {
       jezebel.run([], {});
       expect(jezebel.repl.start).toHaveBeenCalledWith('> ');
     });
+
+    it('calls the onStart hook', function() {
+      settings.onStart = jasmine.createSpy('onStart');
+      jezebel.run([], {});
+      expect(settings.onStart).toHaveBeenCalled();
+    });
   });
 
   describe('fileChanged', function() {
     it('runs tests if the file has changed', function() {
+      spyOn(console, 'log');
       spyOn(childProcess, 'spawn').andReturn(process);
       jezebel.fileChanged(__filename, {mtime: new Date(100)}, {mtime: new Date(0)});
       expect(childProcess.spawn).toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledWith('Running examples in spec/jezebel_spec.js');
     });
 
     it('does not run the tests if the file has not actually changed', function() {
@@ -52,7 +61,7 @@ describe('jezebel', function() {
       expect(process.stdin.emit).not.toHaveBeenCalled();
     });
 
-    it('invokes the config callback to determine the tests to run', function() {
+    it('invokes the settings callback to determine the tests to run', function() {
       pending();
     });
   });

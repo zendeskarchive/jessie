@@ -1,24 +1,25 @@
-var passes = 0,
-    fails = 0,
-    changes = 0;
+var stats;
 
-exports.onPass = function() {
-  passes += 1;
+exports.settings = {
+  onStart: function(replSession) {
+    stats = {
+      passes: 0,
+      fails: 0,
+      changes: 0
+    };
+  },
+  onPass: function() {
+    stats.passes += 1;
+  },
+  onFail: function() {
+    stats.fails += 1;
+  },
+  onChange: function(path, curr, prev) {
+    stats.changes += 1;
+  }
 };
-
-exports.onFail = function() {
-  fails += 1;
-};
-
-exports.onChange = function() {
-  changes += 1;
-}
 
 // Run me from the REPL to see your test stats!
 exports.stats = function() {
-  return {
-    passes: passes,
-    fails: fails,
-    changes: changes 
-  };
+  return stats;
 }
