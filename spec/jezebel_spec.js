@@ -43,7 +43,7 @@ describe('jezebel', function() {
   describe('fileChanged', function() {
     it('runs tests if the file has changed', function() {
       spyOn(childProcess, 'spawn').andReturn(process);
-      jezebel.fileChanged("", {mtime: new Date(100)}, {mtime: new Date(0)});
+      jezebel.fileChanged(__filename, {mtime: new Date(100)}, {mtime: new Date(0)});
       expect(childProcess.spawn).toHaveBeenCalled();
     });
 
@@ -69,26 +69,26 @@ describe('jezebel', function() {
     });
 
     it('runs the specified tests', function() {
-      jezebel.runTests();
+      jezebel.runTests(['spec']);
       expect(childProcess.spawn).toHaveBeenCalledWith(binDir() + '/jessie', ['spec']);
     });
 
     it('writes stdout to sys.print', function() {
       spyOn(sys, 'print');
-      jezebel.runTests();
+      jezebel.runTests(['spec']);
       child.stdout.addListener.argsForCall[0][1]('hello');
       expect(sys.print).toHaveBeenCalledWith('hello');
     });
 
     it('writes stderr to sys.debug', function() {
       spyOn(sys, 'debug');
-      jezebel.runTests();
+      jezebel.runTests(['spec']);
       child.stderr.addListener.argsForCall[0][1]('goodbye');
       expect(sys.debug).toHaveBeenCalledWith('goodbye');
     });
 
     it('adds a line feed after running to re-prompt the repl', function() {
-      jezebel.runTests();
+      jezebel.runTests(['spec']);
       child.on.argsForCall[0][1]();
       expectReplEval("\n");
     });
