@@ -1,12 +1,12 @@
 describe('jezebel', function() {
   var childProcess = require('child_process'),
       sys = require('sys');
-  var watcher, jezebel, repl, session, setings; 
+  var watcher, jezebel, repl, session, settings;
 
   beforeEach(function() {
     watcher = require('jezebel/watcher');
     jezebel = require('jezebel');
-    session = {context: {}}; 
+    session = {context: {}};
     spyOn(jezebel.repl, 'start').andReturn(session);
     spyOn(watcher, 'watchFiles');
     spyOn(process.stdin, 'emit');
@@ -62,7 +62,15 @@ describe('jezebel', function() {
     });
 
     it('invokes the settings callback to determine the tests to run', function() {
-      pending();
+      spyOn(console, 'log');
+      var settings = require('jezebel').settings
+      settings.onChange = function() {}
+      spyOn(settings, 'onChange').andReturn(['spec/foo_spec.js'])
+      spyOn(childProcess, 'spawn').andReturn(process);
+      jezebel.fileChanged(__filename, {mtime: new Date(100)}, {mtime: new Date(0)});
+      expect(settings.onChange).toHaveBeenCalled();
+      expect(console.log).toHaveBeenCalledWith('Running examples in spec/foo_spec.js');
+      settings.onChange = null;
     });
   });
 
