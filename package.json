@@ -1,6 +1,6 @@
 {
   "name"          : "jessie",
-  "version"       : "0.3.1",
+  "version"       : "0.3.2",
   "description"   : "Node runner for Jasmine JavaScript BDD testing framework",
   "homepage"      : [ "https://github.com/futuresimple/jessie"],
   "repository"    : { "type" : "git", "url"  : "https://github.com/futuresimple/jessie.git" },
