@@ -1,13 +1,13 @@
 = Jessie - a Node runner for Jasmine
 
-Jessie is a Node runner for Jasmine. It was created to provide better reporting on failures, more modular design, easier creation of formatters and optional syntactic sugar.  
+Jessie is a Node runner for Jasmine. It was created to provide better reporting on failures, more modular design, easier creation of formatters and optional syntactic sugar.
 
 === Installation
 
 Stable version is available on npm, so you can install by using:
 
   npm install jessie
-  
+
 If you want to install the edge development version, simply clone this repo and install from it:
 
   git clone git://github.com/futuresimple/jessie.git
@@ -19,14 +19,14 @@ If you want to install the edge development version, simply clone this repo and 
   Usage:
     jessie [OPTIONS] [spec dirs/files]
 
-  Options: 
+  Options:
     -f, --format [STRING]  Output format to use (Default is progress)
     -v, --version          Display the current version
     -h, --help             Display help and usage details
-  
+
 Jessie will run specs in any folder you specify, but it will automatically load up 'spec/spec_helper.js' if it is present.
 
-For details on how to use Jasmine, consult the Jasmine docs at [https://github.com/pivotal/jasmine/wiki]
+For details on how to use Jasmine, consult the Jasmine docs at https://github.com/pivotal/jasmine/wiki
 
 === Formatters
 
@@ -41,7 +41,7 @@ Jessie extends Jasmine with the ability of marking pending specs. All you have t
   it("should be pending", function() {
     pending()
   })
-  
+
 Optionally, you can provide a message that will appear within spec results, simply by sending an argument to pending(), like this:
 
   it("should be pending", function() {
@@ -58,19 +58,23 @@ If you want, Jessie can extend the built-in prototypes with syntactic sugar, so 
   variable.should_be_a(String)
 
 The number of these methods is limited and will possibly grow with time.
-  
+
 To use them, put this line into spec/spec_helper.js
 
   require('jessie').sugar()
 
+=== Continuous test runner
+
+If you want to have your specs run continuously, see {Jezebel}[https://github.com/benrady/jezebel].
+
 == Development
 
-Jessie is a fresh project, so forks are very welcome! 
+Jessie is a fresh project, so forks are very welcome!
 
 === Testing
 
 Tests are in Jasmine and run on Jessie. In order to run them, use the binary in the bin folder (be sure to run `npm install` first to get the dependencies)
-  
+
   bin/jessie spec
 
 == Acknowledgement
