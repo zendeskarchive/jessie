@@ -45,6 +45,6 @@ describe('jessie.jasmine', function() {
   it("should extend Jasmine with ability to define a pending spec by calling a it without a callback", function() {
     spyOn(jasmine.Env.prototype, 'it_without_default_pending').andReturn('')
     jasmine.Env.prototype.it("Foo")
-    expect(jasmine.Env.prototype.it_without_default_pending).toHaveBeenCalledWith("Foo", jasmine.placeholderPendingFunction)
+    jasmine.Env.prototype.it_without_default_pending.should_have_been_called_with("Foo", jasmine.placeholderPendingFunction)
   })
 })

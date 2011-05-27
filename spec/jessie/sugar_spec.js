@@ -98,6 +98,28 @@ describe('jessie.sugar', function() {
 
   })
 
+  describe('.should_have_not_been_called', function() {
+
+    it('should work with functions', function() {
+      object = { 'func': function() {} }
+      spyOn(object, 'func')
+      object.func.should_have_not_been_called()
+    })
+
+  })
+
+  describe('.should_have_been_called_with', function() {
+
+    it('should work with functions', function() {
+      object = { 'func': function() {} }
+      spyOn(object, 'func')
+      object.func('Foo')
+      object.func.should_have_been_called()
+      object.func.should_have_been_called_with("Foo")
+    })
+
+  })
+
   describe('jasmine', function() {
 
     it("should extend jasmine.PrettyPrinter.prototype.format with ability to run emitJasmine", function() {
