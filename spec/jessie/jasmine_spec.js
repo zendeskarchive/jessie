@@ -1,5 +1,5 @@
 describe('jessie.jasmine', function() {
-  
+
   it('should extend jasmine.Spec.prototype.fail with stacktrace', function() {
     jasmine.Spec.prototype.fail.toString().should_match('expectationResult.stacktrace')
   })
@@ -7,7 +7,7 @@ describe('jessie.jasmine', function() {
   it('should extend jasmine.PrettyPrinter.prototype.iterateObject with checking for should_ properties', function() {
     jasmine.PrettyPrinter.prototype.iterateObject.toString().should_match('var should_regex')
   })
-  
+
   it('should extend jasmine.Suite.prototype.execute with reportSuiteStarting event', function() {
     jasmine.Suite.prototype.execute.toString().should_match('reportSuiteStarting')
   })
@@ -17,7 +17,7 @@ describe('jessie.jasmine', function() {
     jasmine.Spec.prototype.fail("this is an error");
     expect(jasmine.Spec.prototype.results_.addResult).toHaveBeenCalled();
   });
-  
+
   it("should extend Jasmine with ability to add pending notification", function() {
     var raised = 0, exception = null
     try {
@@ -42,4 +42,9 @@ describe('jessie.jasmine', function() {
     exception.message.should_be('Write some specs')
   })
 
+  it("should extend Jasmine with ability to define a pending spec by calling a it without a callback", function() {
+    spyOn(jasmine.Env.prototype, 'it_without_default_pending').andReturn('')
+    jasmine.Env.prototype.it("Foo")
+    expect(jasmine.Env.prototype.it_without_default_pending).toHaveBeenCalledWith("Foo", jasmine.placeholderPendingFunction)
+  })
 })
