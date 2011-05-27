@@ -36,7 +36,11 @@ Currently Jessie ships with 2 formatters: progress and nested. By default it use
 
 === Pending specs
 
-Jessie extends Jasmine with the ability of marking pending specs. All you have to do is call the pending() function within your spec, like this:
+Jessie extends Jasmine with the ability of marking pending specs. You have 2 options - one is to call it with only the description, like this:
+
+  it("should be pending")
+
+Another way is to call the pending() function within your spec, like this:
 
   it("should be pending", function() {
     pending()
