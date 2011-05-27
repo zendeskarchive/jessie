@@ -1,5 +1,5 @@
 describe('jessie.sugar', function() {
-  
+
   describe('.should_be', function() {
 
     it('should work with strings', function() {
@@ -23,7 +23,7 @@ describe('jessie.sugar', function() {
     })
 
   })
-  
+
   describe('.should_not_be', function() {
 
     it('should work with strings', function() {
@@ -42,29 +42,29 @@ describe('jessie.sugar', function() {
       var variable = [1,2]
       variable.should_not_be([1,2,3])
     })
-    
+
   })
-  
+
   describe('.should_match', function() {
-    
+
     it('should work with strings', function() {
       var variable = "Michael Johnson"
       variable.should_match('Johnson')
     })
-    
+
   })
 
   describe('.should_not_match', function() {
-    
+
     it('should work with strings', function() {
       var variable = "Michael Johnson"
       variable.should_not_match('Jackson')
     })
-    
+
   })
-  
+
   describe('.should_be_a', function() {
-    
+
     it('should work with strings', function() {
       var variable = "Foo"
       variable.should_be_a(String)
@@ -77,21 +77,32 @@ describe('jessie.sugar', function() {
 
     it('should work with arrays', function() {
       var variable = [1,2]
-      variable.should_be_a(Array)      
-    })  
+      variable.should_be_a(Array)
+    })
 
     it('should work with functions', function() {
       var variable = function() {}
-      variable.should_be_a(Function)      
-    })  
-    
+      variable.should_be_a(Function)
+    })
+
   })
-  
+
+  describe('.should_have_been_called', function() {
+
+    it('should work with functions', function() {
+      object = { 'func': function() {} }
+      spyOn(object, 'func')
+      object.func()
+      object.func.should_have_been_called()
+    })
+
+  })
+
   describe('jasmine', function() {
-    
+
     it("should extend jasmine.PrettyPrinter.prototype.format with ability to run emitJasmine", function() {
       jasmine.PrettyPrinter.prototype.format.toString().should_match('value.emitJasmine')
     })
-    
+
   })
 })
