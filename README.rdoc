@@ -1,4 +1,4 @@
-= Jessie - a Node runner for Jasmine ![Project status](http://stillmaintained.com/nvie/gitflow.png)
+= Jessie - a Node runner for Jasmine http://stillmaintained.com/nvie/gitflow.png
 
 Jessie is a Node runner for Jasmine. It was created to provide better reporting on failures, more modular design, easier creation of formatters and optional syntactic sugar.
 
