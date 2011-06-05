@@ -67,6 +67,14 @@ To use them, put this line into spec/spec_helper.js
 
   require('jessie').sugar()
 
+=== CoffeeScript
+
+Jessie supports CoffeeScript out of the box. All you need to do is add this line to spec/spec_helper.js
+
+  require('coffee-script')
+
+With that set set up, you can test your CoffeeScript code and have specs in CoffeeScript.
+
 === Continuous test runner
 
 If you want to have your specs run continuously, see {Jezebel}[https://github.com/benrady/jezebel].
