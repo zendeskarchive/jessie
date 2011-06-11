@@ -9,7 +9,7 @@ require.paths.push(process.cwd() + '/spec')
 
 var jessie = require(path.join(lib, 'jessie'));
 
-// Load package.json 
+// Load package.json
 var pkgsrc  = fs.readFileSync(__dirname + '/../package.json');
 var pkg     = JSON.parse(pkgsrc)
 
@@ -36,6 +36,13 @@ cli.main(function(args, options) {
     process.exit(1)
   }
   jessie.run(args, options, function(fail) {
-    process.exit(fail ? 1 : 0)
+    if (process.stdout.bufferSize > 0) {
+      process.stdout.on('drain', function() {
+        process.exit(fail ? 1 : 0)
+      })
+    } else {
+      process.exit(fail ? 1 : 0)
+    }
+
   })
 })
