@@ -20,7 +20,8 @@ cli.setApp(pkg.name, pkg.version)
 cli.setUsage('jessie [OPTIONS] [spec dirs/files]')
 
 cli.parse({
-  format: ['f', 'Output format to use', 'string', 'progress']
+  format: ['f', 'Output format to use', 'string', 'progress'],
+  nocolor: ['n', 'Disabled colored output']
 }, null);
 
 process.on('uncaughtException', function (err) {
