@@ -3,7 +3,7 @@ describe('jessie.finder', function() {
   var finder = new (require('jessie/finder').finder)()
 
   it("should find files if only dir is specified", function() {
-    finder.find(['spec']).length.should_be(12)
+    finder.find(['spec']).length.should_be(13)
   })
 
   it("should find coffee script files", function() {
@@ -23,7 +23,7 @@ describe('jessie.finder', function() {
   })
 
   it('leaves non-relative paths alone', function() {
-    finder.find([path.resolve('spec')]).length.should_be(12)
+    finder.find([path.resolve('spec')]).length.should_be(13)
   });
 
   it("should find files if only files are specified", function() {
@@ -31,7 +31,8 @@ describe('jessie.finder', function() {
   })
 
   it("should find files if both dirs and files are specified", function() {
-    finder.find(['spec/jessie/formatters', 'spec/jessie/finder_spec.js']).length.should_be(3)
+    finder.find(['spec/jessie/formatters', 'spec/jessie/finder_spec.js']).length.should_be(4)
   })
 
 })
+
