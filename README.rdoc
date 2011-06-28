@@ -30,9 +30,15 @@ For details on how to use Jasmine, consult the Jasmine docs at https://github.co
 
 === Formatters
 
-Currently Jessie ships with 2 formatters: progress and nested. By default it uses progress. If you want to use nested, you can do it by specifying the -f option:
+Currently Jessie ships with 3 formatters: progress, nested and xunit. By default it uses progress. If you want to use a different one, you can do it by specifying the -f option:
 
-  jessie spec -f nested
+  jessie -f [formatter_name] spec
+
+* Special note on ((*xunit*)):
+Since this formatter is more useful when in a Continuous Integration environment, sendind its output to an XML file would be the most common thing to do.
+Given that Jessie creates separate processes to execute the tests, simply sending the output to a file like (({jessie -f xunit spec > test_results.xml})) wouldn't work most of the times. So the following does the trick:
+
+  jessie -f xunit spec | cat > test_results.xml
 
 === Pending specs
 
@@ -96,3 +102,4 @@ jessie is largely based on https://github.com/mhevery/jasmine-node. The goal of 
 === Copyright
 
 Copyright (c) 2011 Marcin Bunsch, Future Simple Inc. See LICENSE for details.
+
