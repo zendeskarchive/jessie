@@ -34,9 +34,9 @@ Currently Jessie ships with 3 formatters: progress, nested and xunit. By default
 
   jessie -f [formatter_name] spec
 
-*Special note on xunit*:
+* Special note on *xunit*:
 Since this formatter is more useful when in a Continuous Integration environment, sendind its output to an XML file would be the most common thing to do.
-Given that Jessie creates separate processes to execute the tests, simply sending the output to a file like {jessie -f xunit spec > test_results.xml} wouldn't work most of the times. So the following does the trick:
+Given that Jessie creates separate processes to execute the tests, simply sending the output to a file like "jessie -f xunit spec > test_results.xml" wouldn't work most of the times. So the following does the trick:
 
   jessie -f xunit spec | cat > test_results.xml
 
