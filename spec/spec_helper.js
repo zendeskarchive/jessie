@@ -1,4 +1,4 @@
-var jessie = require('jessie')
+var jessie = require('../lib/jessie')
 jessie.sugar()
 
 require('coffee-script');

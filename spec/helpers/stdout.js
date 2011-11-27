@@ -1,5 +1,5 @@
 var StdoutCapture = function() {
-  var sys = require('sys')
+  var sys = require('util')
   var originals = {
     puts: sys.puts,
     print: sys.print

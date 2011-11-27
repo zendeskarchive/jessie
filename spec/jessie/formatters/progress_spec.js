@@ -1,12 +1,12 @@
 describe('formatters', function() {
-  var reporter = new (require('jessie/reporter')).reporter('progress')
+  var reporter = new (require('../../../lib/jessie/reporter')).reporter('progress')
 
   describe('progress formatter', function() {
 
     describe('single spec', function() {
 
       it("should use a dot to render a successful spec", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: false})
         })
         capture.output().should_match('.')
@@ -14,7 +14,7 @@ describe('formatters', function() {
       })
 
       it("should use a star to render a pending spec", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({pending: true})
         })
         capture.output().should_match(/\*/)
@@ -22,7 +22,7 @@ describe('formatters', function() {
       })
 
       it("should use a F to render a failed spec", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: true})
         })
         capture.output().should_match('F')
@@ -40,7 +40,7 @@ describe('formatters', function() {
       }]
 
       it("should properly render a summary", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 
@@ -61,7 +61,7 @@ describe('formatters', function() {
           stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
         }]
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 
@@ -82,7 +82,7 @@ describe('formatters', function() {
           stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
         }]
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 
