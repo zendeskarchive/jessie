@@ -1,6 +1,6 @@
 describe('jessie.runner', function() {
 
-  var runner = new (require('jessie/runner')).runner([''], {})
+  var runner = new (require('../../lib/jessie/runner')).runner([''], {})
 
   it("should load finder", function() {
     expect(runner.finder).toBeDefined()

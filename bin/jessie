@@ -1,16 +1,9 @@
 #!/usr/bin/env node
 // Load jessie
-var path   = require('path');
-var sys   = require('sys');
-var fs     = require('fs');
-var lib    = path.join(path.dirname(fs.realpathSync(__filename)), '../lib');
-require.paths.push(lib)
-require.paths.push(process.cwd() + '/spec')
-
-var jessie = require(path.join(lib, 'jessie'));
+var jessie = require('../lib/jessie');
 
 // Load package.json
-var pkgsrc  = fs.readFileSync(__dirname + '/../package.json');
+var pkgsrc  = require('fs').readFileSync(__dirname + '/../package.json');
 var pkg     = JSON.parse(pkgsrc)
 
 // Enable cli and set version name based on package.json
@@ -24,7 +17,7 @@ cli.parse({
 }, null);
 
 process.on('uncaughtException', function (err) {
-  var ansi = require('jessie/ansi')
+  var ansi = require('../lib/jessie/ansi')
   console.log(ansi.red + "Jessie failed to start. Here's some info about the problem:"+ansi.none)
   console.log(err.stack);
 });
@@ -32,7 +25,7 @@ process.on('uncaughtException', function (err) {
 // Main loop
 cli.main(function(args, options) {
   if (args.length == 0) {
-    sys.puts(cli.getUsage())
+    require('util').puts(cli.getUsage())
     process.exit(1)
   }
   jessie.run(args, options, function(fail) {

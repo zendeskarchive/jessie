@@ -10,7 +10,7 @@ function specsAsArray(output) {
 }
 
 describe('XUnit formatter', function() {
-  var formatter = new (require('jessie/reporter')).reporter('xunit').formatter
+  var formatter = new (require('../../../lib/jessie/reporter')).reporter('xunit').formatter
 
   var knownResults;
   var emptyRunner;
@@ -41,7 +41,7 @@ describe('XUnit formatter', function() {
   });
 
   it('should add an open testsuite tag with the summary in the first position of the output buffer', function() {
-    capture = require('helpers/stdout').capture(function() {
+    capture = require('../../helpers/stdout').capture(function() {
       formatter.finish(knownResults, emptyRunner);
     });
     var tag = outputAsArray(capture.output())[0];
@@ -56,7 +56,7 @@ describe('XUnit formatter', function() {
   });
 
   it('should have the last tag as a close testsuite tag', function() {
-    capture = require('helpers/stdout').capture(function() {
+    capture = require('../../helpers/stdout').capture(function() {
       formatter.finish(knownResults, emptyRunner);
     });
     var output = outputAsArray(capture.output());
@@ -65,7 +65,7 @@ describe('XUnit formatter', function() {
   });
 
   it('should add an open tastcase tag with the summary to the output buffer for successful specs', function() {
-    capture = require('helpers/stdout').capture(function() {
+    capture = require('../../helpers/stdout').capture(function() {
       formatter.finish(knownResults, runnerWithOneSpec);
     });
     var tag = specsAsArray(capture.output())[0];
@@ -78,7 +78,7 @@ describe('XUnit formatter', function() {
 
   it('should add the reasons of a pended spec to the output buffer', function() {
     runnerWithOneSpec.suites()[0].specs()[0].results().getItems()[0].pending = true;
-    capture = require('helpers/stdout').capture(function() {
+    capture = require('../../helpers/stdout').capture(function() {
       formatter.finish(knownResults, runnerWithOneSpec);
     });
     var tag = specsAsArray(capture.output())[0];
@@ -89,7 +89,7 @@ describe('XUnit formatter', function() {
 
   it('should add the reasons of a failed spec to the output buffer', function() {
     runnerWithOneSpec.suites()[0].specs()[0].results().failedCount = 1;
-    capture = require('helpers/stdout').capture(function() {
+    capture = require('../../helpers/stdout').capture(function() {
       formatter.finish(knownResults, runnerWithOneSpec);
     });
     var tag = specsAsArray(capture.output())[0];

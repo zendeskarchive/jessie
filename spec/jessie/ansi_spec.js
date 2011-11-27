@@ -1,6 +1,6 @@
 describe('jessie.ansi', function() {
 
-  var ansi = require('jessie/ansi')
+  var ansi = require('../../lib/jessie/ansi')
 
   it('should have proper red', function() {
     ansi.red.should_match(/\033\[31m/)
