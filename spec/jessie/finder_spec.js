@@ -1,6 +1,6 @@
 describe('jessie.finder', function() {
   var path = require('path');
-  var finder = new (require('jessie/finder').finder)()
+  var finder = new (require('../../lib/jessie/finder').finder)()
 
   it("should find files if only dir is specified", function() {
     finder.find(['spec']).length.should_be(13)

@@ -1,12 +1,12 @@
 describe('formatters', function() {
-  var reporter = new (require('jessie/reporter')).reporter('nested')
+  var reporter = new (require('../../../lib/jessie/reporter')).reporter('nested')
 
   describe('nested formatter', function() {
 
     describe('single spec', function() {
 
       it("should use the green spec description to render a successful spec", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: false}, {description: 'my spec'})
         })
         capture.output().should_match('my spec')
@@ -15,7 +15,7 @@ describe('formatters', function() {
 
       it("should use the red spec description to render a failing spec", function() {
         var original_depth = reporter.formatter.depth
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
         capture.output().should_match('my spec')
@@ -25,7 +25,7 @@ describe('formatters', function() {
 
       it("should use the yellow spec description to render a pending spec", function() {
         var original_depth = reporter.formatter.depth
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.spec({pending: true}, {description: 'my spec'})
         })
         capture.output().should_match('my spec')
@@ -36,13 +36,13 @@ describe('formatters', function() {
       it("should render the spec with appropriate spacing on the left", function() {
         var original_depth = reporter.formatter.depth
         reporter.formatter.depth = 1
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.specStart({description: 'my spec'})
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
         capture.output().should_match(/^ {2}/)
         reporter.formatter.depth = 2
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.specStart({description: 'my spec'})
           reporter.formatter.spec({fail: true}, {description: 'my spec'})
         })
@@ -57,7 +57,7 @@ describe('formatters', function() {
       it("should render the suite name", function() {
         var original_depth = reporter.formatter.depth
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
         })
         capture.output().should_match('my suite')
@@ -69,7 +69,7 @@ describe('formatters', function() {
         var original_depth = reporter.formatter.depth
 
         reporter.formatter.depth = 1
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
         })
 
@@ -80,7 +80,7 @@ describe('formatters', function() {
         reporter.formatter.depth.should_be(1)
 
         reporter.formatter.depth = 2
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
         })
         capture.output().should_match(/^ {4}/)
@@ -94,7 +94,7 @@ describe('formatters', function() {
 
         reporter.formatter.depth = 1
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.suiteStart({description: 'my suite'})
         })
 
@@ -125,7 +125,7 @@ describe('formatters', function() {
       }]
 
       it("should properly render a summary", function() {
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 
@@ -146,7 +146,7 @@ describe('formatters', function() {
           stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
         }]
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 
@@ -167,7 +167,7 @@ describe('formatters', function() {
           stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
         }]
 
-        capture = require('helpers/stdout').capture(function() {
+        capture = require('../../helpers/stdout').capture(function() {
           reporter.formatter.finish(result)
         })
 

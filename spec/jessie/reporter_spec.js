@@ -1,5 +1,5 @@
 describe('jessie.reporter', function() {
-  var reporter = new (require('jessie/reporter')).reporter('progress')
+  var reporter = new (require('../../lib/jessie/reporter')).reporter('progress')
 
   it("should load formatter", function() {
     expect(reporter.formatter.constructor).toEqual(Object)
@@ -18,7 +18,7 @@ describe('jessie.reporter', function() {
   describe('#printSummary', function() {
 
     it("should print a summary of a good run", function() {
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printSummary({duration: 12, failed: 0, total: 2})
       })
       capture.output().should_match('2 examples')
@@ -27,7 +27,7 @@ describe('jessie.reporter', function() {
     })
 
     it("should print a summary a failed run", function() {
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printSummary({duration: 15, failed: 1, total: 2})
       })
       capture.output().should_match(/\033\[31m/) // red
@@ -36,7 +36,7 @@ describe('jessie.reporter', function() {
     })
 
     it("should print a summary a pending and failed run", function() {
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printSummary({duration: 15, failed: 1, total: 3, pending: 1})
       })
       capture.output().should_match(/\033\[31m/) // red
@@ -45,7 +45,7 @@ describe('jessie.reporter', function() {
     })
 
     it("should print a summary of a pending", function() {
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printSummary({duration: 15, total: 3, pending: 1})
       })
       capture.output().should_match(/\033\[33m/) // yellow
@@ -58,7 +58,7 @@ describe('jessie.reporter', function() {
   describe('#extractFailureLine', function() {
 
     it("should extract a line from a stacktrace line", function() {
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.extractFailureLine('./spec/jessie/reporter_spec.js:1:1')
       })
       capture.output().should_match(/describe\(\'jessie.reporter\', function\(\) \{/)
@@ -75,7 +75,7 @@ describe('jessie.reporter', function() {
         stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
       }]
 
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printFailures(failures)
       })
 
@@ -96,7 +96,7 @@ describe('jessie.reporter', function() {
         stacktrace: ['Expected A to be B', 'file.js:23:2', 'another_file.js:30:11']
       }]
 
-      capture = require('helpers/stdout').capture(function() {
+      capture = require('../helpers/stdout').capture(function() {
         reporter.printPendings(failures)
       })
 
