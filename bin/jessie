@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Load jessie
 var jessie = require('../lib/jessie');
+global.jessie = jessie;
 
 // Load package.json
 var pkgsrc  = require('fs').readFileSync(__dirname + '/../package.json');
