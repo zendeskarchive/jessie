@@ -30,6 +30,7 @@ cli.main(function(args, options) {
     process.exit(1)
   }
   jessie.run(args, options, function(fail) {
+    jessie.callbacks.trigger('finish');
     if (process.stdout.bufferSize > 0) {
       process.stdout.on('drain', function() {
         process.exit(fail ? 1 : 0)
