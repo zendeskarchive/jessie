@@ -85,6 +85,10 @@ With that set set up, you can test your CoffeeScript code and have specs in Coff
 
 If you want to have your specs run continuously, see {Jezebel}[https://github.com/benrady/jezebel].
 
+=== Usage with grunt
+
+If you use grunt, there's a plugin for it, called {grunt-jessie}[https://npmjs.org/package/grunt-jessie] by Kenneth Jørgensen.
+
 == Development
 
 Jessie is a fresh project, so forks are very welcome!
